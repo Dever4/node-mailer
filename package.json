@@ -1,9 +1,12 @@
 {
-  "name": "node-mailer-api",
+  "name": "your-project-name",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
-    "start": "vercel dev"
+    "build": "vite build",
+    "dev": "vite"
+  },
+  "devDependencies": {
+    "vite": "^latest"
   },
   "dependencies": {
     "express": "^4.17.1",
