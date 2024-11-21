@@ -5,9 +5,6 @@
     "build": "vite build",
     "dev": "vite"
   },
-  "devDependencies": {
-    "vite": "^latest"
-  },
   "dependencies": {
     "express": "^4.17.1",
     "nodemailer": "^6.6.3",
