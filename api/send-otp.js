@@ -8,6 +8,7 @@ const sendEmail = async (email, otp) => {
   console.log(`Creating transporter for ${email}`);
   const transporter = nodemailer.createTransport({
     service: 'gmail', 
+    secure: true,
     auth: {
       user: 'lexiscarl9@gmail.com',
       pass: 'isaac1986$',
