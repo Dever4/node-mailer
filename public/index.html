@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Service</title>
+</head>
+<body>
+    <h1>OTP Service</h1>
+    <form id="otpForm">
+        <input type="email" id="email" placeholder="Enter your email" required>
+        <button type="submit">Send OTP</button>
+    </form>
+    <form id="verifyForm" style="display:none;">
+        <input type="text" id="otp" placeholder="Enter OTP" required>
+        <button type="submit">Verify OTP</button>
+    </form>
+    <div id="message"></div>
+
+    <script>
+        const otpForm = document.getElementById('otpForm');
+        const verifyForm = document.getElementById('verifyForm');
+        const messageDiv = document.getElementById('message');
+
+        otpForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+
+            const response = await fetch('/api/send-otp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email }),
+            });
+
+            const result = await response.json();
+            messageDiv.textContent = result.message || result.error;
+
+            if (response.ok) {
+                otpForm.style.display = 'none';
+                verifyForm.style.display = 'block';
+            }
+        });
+
+        verifyForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const otp = document.getElementById('otp').value;
+
+            const response = await fetch('/api/verify-otp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, otp }),
+            });
+
+            const result = await response.json();
+            messageDiv.textContent = result.message || result.error;
+        });
+    </script>
+</body>
+</html>
